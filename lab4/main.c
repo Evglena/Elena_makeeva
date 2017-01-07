@@ -27,28 +27,25 @@ int main() {
     j = 0;
     max_value = 0;
     min_value = 0;
-    printf("Введите букву выражения, которое xотите вычислить - G,F,Y) \n");
+    printf("Введите букву выражения, которое хотите вычислить - G,F,Y) \n");
     scanf ("%s", &r);
 
     switch (r) {
         case 'G':
             while (x1 <= x2) {
                 if ((45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2))) != 0)
-                 G = -(16 * ((pow(a, 2) + 24 * a * x1 - 27 * (pow(x1, 2))))) /
-                      (45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2)));
-                    printf("1 X=%.3lf Y=%.3lf\n  j=%i\n", x1, G, j);
-                    x1 = x1 + b;
-                    mas[j] = G;
-                    if (j == 0)
-                    { max_value = G;
-                        min_value = G;}
-                    if (G > max_value) max_value = mas[j];
-                    if (G < min_value) min_value = mas[j];
-
-                    j += 1;
-
-
-
+                    G = -(16 * ((pow(a, 2) + 24 * a * x1 - 27 * (pow(x1, 2))))) /
+                        (45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2)));
+                printf("X = %.3lf \t| Y = %.3lf\n", x1, G);
+                x1 = x1 + b;
+                mas[j] = G;
+                if (j == 0) {
+                    max_value = G;
+                    min_value = G;
+                }
+                if (G > max_value) max_value = mas[j];
+                if (G < min_value) min_value = mas[j];
+                j += 1;
             }
             printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
             break;
@@ -98,7 +95,7 @@ int main() {
             break;
 
         default:
-             printf("ne verno vvedena function \n");
+            printf("ne verno vvedena function \n");
 
     }
     printf("Вычислим еще раз? (1-да,2-нет) \n");
