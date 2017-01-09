@@ -56,45 +56,43 @@ int main() {
         case 'F':
             while (x1 <= x2) {
                 F = -(atan(pi * (10 * (a * a) + 13 * a * x1 - 30 * (x1 * x1))));
-                printf("%f\n", F);
-                x1 = x1 + b;
-                mas[j] =F;
-                j += 1;
-                j = 0;
-                max_value = mas[0];
-                min_value = mas[0];
-                j += 1;
-                if (mas[j] > max_value)
-                    max_value = mas[j];
-                if (mas[j] < min_value)
-                    min_value = mas[j];
-
-                printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
-
+               printf("X = %.3lf \t| Y = %.3lf\n", x1, F); 
+                    x1 = x1 + b;
+                    mas[j] = F;
+                    if (j <= 0.000001 && j >= -0.000001) { /*ибо нельзя сравнивать с нулём */
+                        max_value = F; 
+                        min_value = F;
+                    }
+                    if (F > max_value) max_value = mas[j];
+                    if (F < min_value) min_value = mas[j];
+                    j += 1;
+                } else {
+                    print("На ноль делить нельзя :)");
+                    return 0;
+                  }
             }
-
+            printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
             break;
 
         case 'Y':
             while (x1 <= x2) {
                 Y = (log(2 * pow(a, 2) + 19 * a * x1 + 9 * pow(x1, 2) + 1)) / log(10);
-                printf("%f\n", Y);
-                x1 = x1 + b;
-                mas[j] = Y;
-                j += 1;
-                j = 0;
-                max_value = mas[0];
-                min_value = mas[0];
-                j += 1;
-                if (mas[j] > max_value)
-                    max_value = mas[j];
-                if (mas[j] < min_value)
-                    min_value = mas[j];
-
-                printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
-
+                printf("X = %.3lf \t| Y = %.3lf\n", x1, Y); 
+                    x1 = x1 + b;
+                    mas[j] = Y;
+                    if (j <= 0.000001 && j >= -0.000001) { /*ибо нельзя сравнивать с нулём */
+                        max_value = Y; 
+                        min_value = Y;
+                    }
+                    if (Y > max_value) max_value = mas[j];
+                    if (Y < min_value) min_value = mas[j];
+                    j += 1;
+                } else {
+                    print("На ноль делить нельзя :)");
+                    return 0;
+                  }
             }
-
+            printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
             break;
 
         default:
