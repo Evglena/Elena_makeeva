@@ -1,122 +1,114 @@
 #include <stdio.h> /*позволяет выводить текст на экран и читать его с клавиатуры*/
-#include <math.h> 
-#include <stdlib.h> /*для перевода из строки в число */
-#include <memory.h>  
+#include <math.h>
+#include <stdlib.h> /* pozvolyaet perevodit iz stroki v chislo*/
+#include <string.h> /* dlya raboti so strokami*/
 
 int main() {
-    char r;
-    double G, F, Y, g_1, g_2;
-    const double pi = 3.14159265358979;
-    double step_for_x, step_for_a;
-    double x1, x2, a1, a2, x_mod, a_mod;
-    char rec[100];
-    char change[255];
-    double run = 1;
-    int kol_step;
+    double G, F, Y, a, x1, x2, min_value, max_value ;
+    int  j,i,step;
+    char r, temp[5],exit[50] = {0}, lol[50];
+    const double pi = 3.14;
+    int pr = 1;
 
-    do {
+    nachalo:
 
-        printf("%s", "Введите первую границу для аргумента: \n");
-        scanf("%s", rec);
-        x1 = atof(rec);
+    printf("%s", "Введите  x1: "); /* s- символ */
+    scanf("%s", temp); /*сканирует значение с клавиатуры */
+    x1=atof(temp);
 
-        printf("%s", "Введите вторую границу для аргумента: \n");
-        scanf("%s", rec);
-        x2 = atof(rec);
+    printf("%s", "Введите x2 ");
+    scanf("%s", temp);
+    x2=atof(temp);
 
-        printf("%s", "Введите первую границу для параметра: \n");
-        scanf("%s", rec);
-        a1 = atof(rec);
+    printf("%s", "Введите a: ");
+    scanf("%s", temp);
+    a=atof(temp);
 
-        printf("%s", "Введите вторую границу для параметра: \n");
-        scanf("%s", rec);
-        a2 = atof(rec);
+    printf("%s", "Введите параметр шага  ");
+    scanf("%s", temp);
+    step=atoi(temp); /*atoi-integer, atof-float*/
 
-        printf("%s", "Введите количество шагов: \n");
-        scanf("%s", rec);
-        kol_step = (int) atof(rec);
 
-        step_for_x = (x2 - x1) / kol_step;
-        step_for_a = (a2 - a1) / kol_step;
+    double mas[100];
+    j = 0;
+    max_value = 0;
+    min_value = 0;
 
-        printf("Введите букву выражения, которое xотите вычислить - G,F,Y) \n");
-        scanf("%s", &r);
-        int i = 0;
-        int j = 0;
-        x_mod = x1;
-        a_mod = a1;
-        double mass[3][kol_step];
-        switch (r) {
-            case 'G':
-                printf("Значение функции ");
-                printf(" Значение X\n");
-                int m = 0;
-                for (m = 0; m < kol_step; ++m) {
-                    g_1 = -(8 * (12 * (a_mod * a_mod) + 68 * a_mod * x_mod + 63 * (x_mod * x_mod)));
-                    g_2 = (4 * (a_mod * a_mod) + a_mod * x_mod - 5 * (x_mod * x_mod));
-                    if (g_2 != 0) {
-                        G = g_1 / g_2;
-                        printf("%12.0lf ", G);
-                        printf("%10.0lf ", x_mod);
-                        printf("%10.0lf ", a_mod);
-                        printf("\n");
-                        mass[0][j] = G;
-                        mass[1][j] = x_mod;
-                        mass[2][j] = a_mod;
-                        x_mod += step_for_x;
-                        a_mod += step_for_a;
-                        j+=1;
+    printf("Введите букву выражения, которое хотите вычислить - G,F,Y) \n");
+    scanf ("%s", &r);
+
+    switch (r) {
+        case 'G':
+            while (x1 <= x2) {
+                if ((45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2))) >=0.000001 || (45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2)) <= -0.000001))
+                {
+                    G = -(16 * ((pow(a, 2) + 24 * a * x1 - 27 * (pow(x1, 2))))) /
+                        (45 * (pow(a, 2)) - 29 * a * x1 + 4 * (pow(x1, 2)));
+                    printf("X = %.3lf \t| Y = %.3lf\n", x1, G);
+                    x1 = x1 + step;
+                    mas[j] = G;
+                    if (j <= 0.000001 && j >= -0.000001) { /*ибо нельзя сравнивать с нулём */
+                        max_value = G;
+                        min_value = G;
                     }
+                    if (G > max_value) max_value = mas[j];
+                    if (G < min_value) min_value = mas[j];
+                    j += 1;
+                } else {
+                    printf("На ноль делить нельзя :)");
+                    return 0;
                 }
-                printf("значения \n");
-                int k = 0;
-                int l = 0;
-                char mass0[300], mass1[300];
-                for (k = 0; k < kol_step; k++) {
-                    sprintf(mass0, "%.2lf ", mass[0][k]);/* в общем тут в массив mass0  я кладу первую строчку (ибо 0 это первая строчка) массива mass */
-                    sprintf(mass1, "%.2lf ", mass[1][k]);/* тут вторую строчку в другой массив, mass 1*/
-                    strcat(mass0,mass1); /* бай бай*/
-                    printf("%s", mass0); /* выводим - профит!*/ /* ща попробую*/
+            }
+            printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
+            for (i=0;i<j;++i); {
+                sprintf(lol,"%lf",mas[i]);
+                strcat(exit, lol);
+            }
+            printf("%s", exit);
+
+            break;
+
+        case 'F':
+            while (x1 <= x2) {
+                F = -(atan(pi * (10 * (a * a) + 13 * a * x1 - 30 * (x1 * x1))));
+                printf("X = %.3lf \t| Y = %.3lf\n", x1, F);
+                x1 = x1 + step;
+                mas[j] = F;
+                if (j <= 0.000001 && j >= -0.000001) { /*ибо нельзя сравнивать с нулём */
+                    max_value = F;
+                    min_value = F;
                 }
+                if (F > max_value) max_value = mas[j];
+                if (F < min_value) min_value = mas[j];
+                j += 1;
+            }
+            printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
+            break;
 
-                    break;
-
-                    case 'F':
-                        while (x_mod < x2) {
-                            double f_1, f_2;
-                            f_1 = (sin(pi * (40 * (a_mod * a_mod) - 61 * a_mod * x_mod + 7 * (x_mod * x_mod))));
-                            f_2 = (pi * (40 * (a_mod * a_mod) - 61 * a_mod * x_mod + 7 * (x_mod * x_mod)));
-                            if (f_2 != 0.0) {
-                                F = f_1 / f_2;
-                                printf("F = %lf", F);
-                                printf(" при x = %lf", x_mod );
-                                mass[0][j] = F;
-                                mass[1][j] = x_mod;
-                                mass[2][j] = a_mod;
-                                x_mod += step_for_x;
-                                a_mod += step_for_a;
-                            }
-                        }
-                    break;
-
-                    case 'Y':
-                        while (x_mod < x2) {
-                            Y = -7 * (a_mod * a_mod) + 40 * a_mod * x_mod + 63 * (x_mod * x_mod) + 1;
-                            mass[0][j] = Y;
-                            mass[1][j] = x_mod;
-                            mass[2][j] = a_mod;
-                            printf("Y = %lf", mass[i][j]);
-                            x_mod += step_for_x;
-                            a_mod += step_for_a;
-                        }
-                    break;
-
-                    default:
-                        printf("Что то не то, введи еще раз");
+        case 'Y':
+            while (x1 <= x2) {
+                Y = (log(2 * pow(a, 2) + 19 * a * x1 + 9 * pow(x1, 2) + 1)) / log(10);
+                printf("X = %.3lf \t| Y = %.3lf\n", x1, Y);
+                x1 = x1 + step;
+                mas[j] = Y;
+                if (j <= 0.000001 && j >= -0.000001) { /*ибо нельзя сравнивать с нулём */
+                    max_value = Y;
+                    min_value = Y;
                 }
-                printf("Вычислим еще раз? (1-да,2-нет) \n");
-                scanf("%lf", &run);
+                if (Y > max_value) max_value = mas[j];
+                if (Y < min_value) min_value = mas[j];
+                j += 1;
+            }
+            printf(" Максимальное значение  = %9.3lf\n Минимальное значение = %9.3lf\n", max_value, min_value);
+            break;
+
+        default:
+            printf("ne verno vvedena function \n");
+
     }
-    while (run == 1);
+    printf("Вычислим еще раз? (1-да) \n");
+    scanf("%i", &pr);
+    if (pr == 1)
+        goto nachalo;
     return 0;
 }
