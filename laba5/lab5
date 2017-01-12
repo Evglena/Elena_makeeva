@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <memory.h>
+#include <stdio.h> /*позволяет выводить текст на экран и читать его с клавиатуры*/
+#include <math.h> 
+#include <stdlib.h> /*для перевода из строки в число */
+#include <memory.h>  
 
 int main() {
     char r;
