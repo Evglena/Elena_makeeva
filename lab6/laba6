@@ -1,0 +1,115 @@
+#include <stdio.h> /*позволяет выводить текст на экран и читать его с клавиатуры*/
+#include <math.h>
+#include <stdlib.h> /* позволяет переводить из строки в число*/
+#include <string.h> /* для работы со строками*/
+
+int main()
+{
+struct {
+double G[100];
+double F[100];
+double Y[100];
+}
+functions;
+
+char temp[100];
+int pr = 1;
+int i = 0;
+double x, a, x2, step, memory[1];
+const double pi = 3.14;
+
+nachalo:
+
+printf("%s", "Введите x меньше x2.");
+printf("%s", "Введите x: ");
+scanf("%s", temp);
+x = atof(temp);
+memset(temp, 0, 100);
+
+printf("%s", "Введите x2: ");
+scanf("%s", temp);
+x2 = atof(temp);
+memset(temp, 0, 100);
+
+printf("%s", "Введите a: ");
+scanf("%s", temp);
+a = atof(temp);
+memset(temp, 0, 100);
+
+printf("%s", "Введите шаг: ");
+scanf("%s", temp);
+step = atof(temp);
+memset(temp, 0, 100);
+
+printf("G: \n");
+
+memory[0] = x;
+memory[1] = x2;
+
+while (x < x2) {
+if (fabs(45 * (pow(a, 2)) - 29 * a * x + 4 * (pow(x, 2))) >=0.00001) {
+functions.G[i] = -(16 * ((pow(a, 2) + 24 * a * x - 27 * (pow(x, 2))))) / (45 * (pow(a, 2)) - 29 * a * x + 4 * (pow(x, 2)));
+printf("G = %f\n", functions.G[i]);
+}
+i++;
+if (i > 100) {
+printf("Массив переполнен");
+break;
+}
+x = x + step;
+if (x >= x2) {
+break;
+}
+}
+printf("=====================\n");
+printf("F: \n");
+i = 0;
+x = memory[0];
+x2 = memory[1];
+
+while (x < x2) {
+if ((-(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x)))) >= -1) && ((-(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x)))) <= 1))) {
+functions.F[i] = -(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x))));
+printf("F = %f\n", functions.F[i]);
+}
+i++;
+if (i > 100) {
+printf("Массив переполнен");
+break;
+}
+x = x + step;
+if (x >= x2) {
+break;
+}
+}
+printf("=====================\n");
+printf("Y: \n");
+i = 0;
+x = memory[0];
+x2 = memory[1];
+
+while (x < x2) {
+if ((2 * pow(a, 2) + 19 * a * x + 9 * pow(x, 2) + 1) >0.0001) {
+functions.Y[i] = ((log(2 * pow(a, 2) + 19 * a * x + 9 * pow(x, 2) + 1)) / (log(10)));
+printf("Y = %f\n", functions.Y[i]);
+}
+i++;
+if (i > 100) {
+printf("Массив переполнен");
+break;
+}
+x = x + step;
+if (x >= x2) {
+break;
+}
+}
+printf("=====================\n");
+printf("exit \n");
+
+printf("Вычислим еще раз? (1-да) \n");
+scanf("%i", &pr);
+if (pr == 1)
+goto nachalo;
+
+return 0;
+}
