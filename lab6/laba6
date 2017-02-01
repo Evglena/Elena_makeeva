@@ -1,7 +1,7 @@
 #include <stdio.h> /*позволяет выводить текст на экран и читать его с клавиатуры*/
 #include <math.h>
-#include <stdlib.h> /* позволяет переводить из строки в число*/
-#include <string.h> /* для работы со строками*/
+#include <stdlib.h> /* pozvolyaet perevodit iz stroki v chislo*/
+#include <string.h> /* dlya raboti so strokami*/
 
 int main()
 {
@@ -16,7 +16,6 @@ char temp[100];
 int pr = 1;
 int i = 0;
 double x, a, x2, step, memory[1];
-const double pi = 3.14;
 
 nachalo:
 
@@ -47,8 +46,8 @@ memory[0] = x;
 memory[1] = x2;
 
 while (x < x2) {
-if (fabs(45 * (pow(a, 2)) - 29 * a * x + 4 * (pow(x, 2))) >=0.00001) {
-functions.G[i] = -(16 * ((pow(a, 2) + 24 * a * x - 27 * (pow(x, 2))))) / (45 * (pow(a, 2)) - 29 * a * x + 4 * (pow(x, 2)));
+if (fabs(45 * a * a - 29 * a * x + 4 * x * x ) >= 0.00001) {
+functions.G[i] = (-(16 * a * a + 24 * a * x - 27 * x * x )) / (45 * a * a - 29 * a * x + 4 * x * x );
 printf("G = %f\n", functions.G[i]);
 }
 i++;
@@ -68,8 +67,8 @@ x = memory[0];
 x2 = memory[1];
 
 while (x < x2) {
-if ((-(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x)))) >= -1) && ((-(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x)))) <= 1))) {
-functions.F[i] = -(atan(pi * (10 * (a * a) + 13 * a * x - 30 * (x * x))));
+if ((cos(9 * a * a - 13 * a * x - 10 * x * x) >= -1) && (cos(9 * a * a - 13 * a * x - 10 * x * x) <= 1)) {
+functions.F[i] = cos(9 * a * a - 13 * a * x - 10 * x * x);
 printf("F = %f\n", functions.F[i]);
 }
 i++;
@@ -89,8 +88,8 @@ x = memory[0];
 x2 = memory[1];
 
 while (x < x2) {
-if ((2 * pow(a, 2) + 19 * a * x + 9 * pow(x, 2) + 1) >0.0001) {
-functions.Y[i] = ((log(2 * pow(a, 2) + 19 * a * x + 9 * pow(x, 2) + 1)) / (log(10)));
+if ((2 * a * a + 19 * a * x + 9 * x * x + 1 ) > 0.0001) {
+functions.Y[i] = (log(2 * a * a + 19 * a * x + 9 * x * x + 1)) / log(10);
 printf("Y = %f\n", functions.Y[i]);
 }
 i++;
@@ -113,3 +112,7 @@ goto nachalo;
 
 return 0;
 }
+
+/*if (((-(atan(pi * (10 * a * a + 13 * a * x - 30 * x * x))) >= -pi/2)) && (((-(atan(pi * (10 * a * a + 13 * a * x - 30 * x * x))) <= pi/2)))) {
+functions.F[i] = ((-(atan(pi * (10 * a * a + 13 * a * x - 30 * x * x))))) ;
+printf("F = %f\n", functions.F[i]);*/
