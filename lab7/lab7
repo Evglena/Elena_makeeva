@@ -1,0 +1,134 @@
+#include <stdio.h> /*позволяет выводить текст на экран и читать его с клавиатуры*/
+#include <math.h>
+#include <stdlib.h> /* pozvolyaet perevodit iz stroki v chislo*/
+#include <string.h> /* dlya raboti so strokami*/
+
+int main()
+{
+	struct {
+	double G[100];
+	double F[100];
+	double Y[100];
+	}
+	functions;
+
+	char temp[100];
+	int pr = 1;
+	int i = 0;
+	double x, a, x2, step, memory[1], result[100];
+	const double pi= 3.14;
+
+	FILE *lol;
+	lol = fopen("/home/euglena/res.txt","w+");
+
+	nachalo:
+
+	printf("%s", "Введите x меньше x2.");
+	printf("%s", "Введите x: ");
+	scanf("%s", temp);
+	x = atof(temp);
+	memset(temp, 0, 100);
+
+	printf("%s", "Введите x2: ");
+	scanf("%s", temp);
+	x2 = atof(temp);
+	memset(temp, 0, 100);
+
+	printf("%s", "Введите a: ");
+	scanf("%s", temp);
+	a = atof(temp);
+	memset(temp, 0, 100);
+
+
+	printf("%s", "Введите шаг: ");
+	scanf("%s", temp);
+	step = atof(temp);
+	memset(temp, 0, 100);
+
+	printf("G: \n");
+
+	memory[0] = x;
+	memory[1] = x2;
+
+	while (x < x2) {
+	if (fabs(45 * a * a - 29 * a * x + 4 * x * x ) >= 0.00001) {
+		functions.G[i] = (-(16 * a * a + 24 * a * x - 27 * x * x )) / (45 * a * a - 29 * a * x + 4 * x * x );
+		printf("G = %f\n", functions.G[i]);
+		fprintf(lol, "%f \n", functions.G[i]);	}
+	i++;
+	if (i > 100) {
+	printf("Массив переполнен");
+	break;
+	}
+	x = x + step;
+	if (x >= x2) {
+	break;
+	}
+	}
+	printf("=====================\n");
+	printf("F: \n");
+	x = memory[0];
+	x2 = memory[1];
+
+	fclose(lol);
+	int o = 0;
+	lol = fopen("/home/euglena/res.txt","r+");
+	for (o = 0; o <i; ++o) {
+		fscanf(lol, "%lf/n", &result[o]);
+	}
+	int j = 0;
+	for (j = 0; j < i; ++j) {
+		printf("%lf", result[j]);
+	}
+	while (x < x2) {
+		if ((pi * (10 * a * a + 13 * a * x - 30 * x * x)) > -1 && (pi * (10 * a * a + 13 * a * x - 30 * x * x)) < 1){
+			printf("Нет");
+		} else {
+			functions.F[i] = ((-(atan(pi * (10 * a * a + 13 * a * x - 30 * x * x)))));
+			printf("F = %f\n", functions.F[i]);
+		}
+
+		i++;
+	if (i > 100) {
+	printf("Массив переполнен");
+	break;
+	}
+	x = x + step;
+	if (x >= x2) {
+	break;
+	}
+	}
+	printf("=====================\n");
+	printf("Y: \n");
+	i = 0;
+	x = memory[0];
+	x2 = memory[1];
+
+	while (x < x2) {
+	if  ((2 * a * a + 19 * a * x + 9 * x * x + 1 ) > 0.0001) {
+		functions.Y[i] = (log(2 * a * a + 19 * a * x + 9 * x * x + 1)) / log(10);
+	printf("Y = %f\n", functions.Y[i]);
+	}
+	i++;
+	if (i > 100) {
+	printf("Массив переполнен");
+	break;
+	}
+	x = x + step;
+	if (x >= x2) {
+	break;
+	}
+	}
+	printf("=====================\n");
+	printf("exit \n");
+
+	for (j = 0; j < i; ++j) {
+		printf("%lf", result[j]);
+	}
+
+	printf("\nВычислим еще раз? (1-да) \n");
+	scanf("%i", &pr);
+	if (pr == 1)
+		goto nachalo;
+	return 0;
+	}
