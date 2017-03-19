@@ -4,7 +4,6 @@ int main() {
     double G, F, Y, a, x1, x2, b, min_value, max_value ;
     int  j;
     char r;
-    const double pi = 3.14;
     int pr = 1;
 
     nachalo:
@@ -57,7 +56,7 @@ int main() {
 
         case 'F':
             while (x1 <= x2) {
-                F = -(atan(pi * (10 * (a * a) + 13 * a * x1 - 30 * (x1 * x1))));
+                F = -(atan(10 * (a * a) + 13 * a * x1 - 30 * (x1 * x1)));
                 printf("X = %.3lf \t| Y = %.3lf\n", x1, F);
                 x1 = x1 + b;
                 mas[j] = F;
