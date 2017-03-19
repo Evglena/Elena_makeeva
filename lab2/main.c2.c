@@ -5,8 +5,6 @@ int main()
 {
 char r;
 double G,F,Y,a,x;
-int pr = 1; 
-  nachalo:
 
 printf("Введите x: \n");
 scanf ("%lf", &x);
@@ -38,9 +36,6 @@ switch (r){
              printf("не верно введена функция \n");
 
     }
-    printf("Вычислим еще раз? (1-да) \n");
-    scanf("%i", &pr);
-    if (pr == 1)
-        goto nachalo;
+  
     return 0;
 }
