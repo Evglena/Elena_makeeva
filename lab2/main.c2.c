@@ -5,6 +5,8 @@ int main()
 {
 char r;
 double G,F,Y,a,x;
+int pr = 1; 
+  nachalo:
 
 printf("Введите x: \n");
 scanf ("%lf", &x);
@@ -31,7 +33,14 @@ switch (r){
     Y=(log(2 * pow(a, 2) + 19 * a * x + 9 * pow(x, 2) + 1))/log(10);
     printf("Y = %lf \n", Y);
   break;
-}
+    
+ default:
+             printf("не верно введена функция \n");
 
-return 0;
+    }
+    printf("Вычислим еще раз? (1-да) \n");
+    scanf("%i", &pr);
+    if (pr == 1)
+        goto nachalo;
+    return 0;
 }
