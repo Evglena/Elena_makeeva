@@ -5,7 +5,7 @@ int main()
 {
 char r;
 double G,F,Y,a,x;
-const double pi=3.14;
+
 printf("Введите x: \n");
 scanf ("%lf", &x);
 
@@ -23,7 +23,7 @@ switch (r){
   break;
 
   case 'F':
-    F=-(atan(pi * (10 * (a * a) + 13 * a * x -30 * (x * x))));
+    F=-(atan(10 * (a * a) + 13 * a * x -30 * (x * x)));
     printf("F = %lf \n", F);
   break;
 
