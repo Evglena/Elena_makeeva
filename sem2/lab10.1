@@ -1,21 +1,23 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
-int main(void)
-{
-    int *result;
-    int i = 0, n;
+int main(void) {
+    int *i, *result, *n;
+    i = NULL;
+    result= NULL;
+    n = NULL;
 
+    n = (int *) malloc(sizeof(int));
+    
     printf("kolvo kvadratov ");
-    scanf("%i", &n);
-    result = (int *) malloc(n * sizeof(int));
+    scanf("%i", n);
+    i = (int *) malloc(sizeof(int));
+    result = (int *) malloc(*n * sizeof(int));
 
-
-    for (i = 0; i <= n; ++i) {
-        result[i] = i * i;
-        printf("%i\n", result[i]);
+    for ((*i) = 0; (*i) <= (*n); ++(*i)) {
+        result[*i] = (*i) * (*i);
+        printf ("%i\t|\t%i\n", *i, result[*i]);
     }
 
-    free(result);
-    return 0;
-}
+};
