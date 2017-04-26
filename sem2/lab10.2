@@ -1,1 +1,44 @@
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+
+int main() {
+
+    struct data {
+        char name[20];
+        double value;
+    };
+
+    int n = 1;
+    int i, change = 0, counter = 0;
+
+    struct data *car;
+    car = (struct data*)malloc(sizeof(struct data) * n);
+
+    /* char *b = NULL;
+    char *resultName = NULL;
+    resultName = malloc(5 * sizeof(char));*/
+
+    while (change != 3) {
+        printf("Введите имя");
+        scanf("%s", car[counter].name);
+        /* sprintf(b, "%s %s", client[counter].name, " "); */
+        printf("Введите стоимость");
+        scanf("%lf", &car[counter].value);
+
+        /* strcat(resultName, b); */
+        printf("Продолжим ввод? 0 - да");
+        scanf("%i", &change);
+        counter++;
+        car = realloc(car, sizeof(struct data) * (counter+1));
+        /* resultName = (char *) realloc(resultName, 5 + sizeof(resultName)); */
+    }
+    int j;
+    /* printf("%s", resultName); */
+    for (j = 0; j < counter; ++j) {
+        printf("%s\t", car[j].name);
+        printf("%lf\t\n", car[j].value);
+    }
+    free(car);
+}
